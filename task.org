@@ -1,5 +1,6 @@
-* TODO [#A] 确定题目
-DEADLINE: <2015-02-06 五 12:00>
+* DONE [#A] 确定题目
+CLOSED: [2015-02-06 五 11:27] DEADLINE: <2015-02-06 五 12:00>
+- State "DONE"       from "TODO"       [2015-02-06 五 11:27]
 * TODO [#A] 查找文献
 DEADLINE: <2015-02-07 六 00:00>
 * TODO 模型 [/]
