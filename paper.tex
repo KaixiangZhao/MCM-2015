@@ -5,7 +5,8 @@
 \usepackage{amsfonts,mathrsfs}      %fonts~~
 \usepackage{graphicx}               %This is for graph inserting.
 \usepackage{paralist}               %Give me compact lists!!!!! 'compactitem' 'compactenum' 'compactdesc'
-%\usepackage{bm}                     %various kinds of bold texts.
+%\usepackage{bm}
+\usepackage{caption2}                 %various kinds of bold texts.
 \usepackage[top =2.54cm, bottom =2.54cm, left =3.18cm, right =3.18 cm]{geometry}
 \usepackage{indentfirst}            %Indent the first letter
 \usepackage{fancyhdr}               %Below is the head of the article.
@@ -94,7 +95,11 @@ There are several tasks we need to finish according to our model:
   friendship that the other offices of ICM are considering building.
 \end{itemize}
 
-\section{Assumptions and Justifications}
+% the main section of the paper
+\section{Human Capital Model}
+\label{sec:human-capital-model}
+
+\subsection{Assumptions and Justifications}
 \label{sec:assumptions-and-justifications}
 
 \begin{itemize}
@@ -102,14 +107,14 @@ There are several tasks we need to finish according to our model:
   promote, he won't churn.
 
 The possibility of the unforeseen accidents, which could force an
-employee to leave his position,is neglected.Human nature, an employee
-will stay at his position to chase for higher level.
+employee to leave his position, is neglected. Based on human nature,
+an employee will stay at his position to chase for higher level.
 
 \item \textbf{assumption 2} For a vacancy,if there exists an
-  employee measures up to it already,ICM won't recruit for it.
+  employee measures up to it already, ICM won't recruit for it.
 
 Since recruiting good people is difficult, time consuming and
-expensive according to issue 5,it is wasteful to recruit for a
+expensive according to issue 5, it is wasteful to recruit for a
 position if an employee can promote to it.
 
 \item \textbf{assumption 3} Demotion won't occur.
@@ -117,22 +122,10 @@ position if an employee can promote to it.
 \item \textbf{assumption 4} Administrative clerk won't promote or be
   transferred.
 
-\item \textbf{assumption 5} For the promotion probability and
-  organization change, the other factors effects the churn probability
-  is invariable.
-
-Though churn derives from varieties of reasons and they are actually
-lacking of known conditions and data to estimate them, we have to
-regard it as stable in our model.
-
-\item \textbf{assumption 6} Each division or office have at least one
+\item \textbf{assumption 5} Each division or office have at least one
   middle manager or senior manager.
 
 \end{itemize}
-
-% the main section of the paper
-\section{Human Capital Model}
-\label{sec:human-capital-model}
 
 \subsection{Model Overview}
 \label{sec:model-overview}
@@ -151,12 +144,14 @@ the social network analysis (SNA) technique. In our case, the
 employees are viewed as nodes and relationships as links among
 them. So, We can simulate the complex relationship via this network.
 
-Definitions of symbols employed in this paper are listed in
-\textbf{Table 1}.
+Definitions of symbols employed in this section are listed in Table
+\ref{variable1}:
 \begin{table}
-\begin{tabular}{|l|l|}
+  \centering
+  \begin{tabular}{l p{10cm}}
+  \toprule{}
   Variable & Description \\
-  \hline
+  \midrule{}
   $i$            &Index of an employee \\
   $L_{i,t}$          &The level of $i$ \\
   $s_{ij,t}$        &The relation strength from $i$ to $j$ \\
@@ -165,8 +160,9 @@ Definitions of symbols employed in this paper are listed in
   $f_{ij,t}$        &Represent the influence caused by relationship
                     between person with many friends and person with
                     few friends \\
-  $c_{i,t}$        &Clustering Coefficient of $i$
+  $c_{i,t}$        &Clustering Coefficient of $i$ \\ \bottomrule{}
 \end{tabular}
+\caption{Variables and Descriptions}\label{variable1}
 \end{table}
 
 \subsection{Human Performance Model}
@@ -204,21 +200,43 @@ We determine weights via the Analytical Hierarchy Process(AHP) [Saaty
 \end{tabular}
 \end{center}
 
-The meaning of the number in each cell is explained in []. The numbers
-themselves are based on our own subjective decisions.
+The meaning of the number in each cell is explained in Figure
+\ref{important}. The numbers themselves are based on our own
+subjective decisions.
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{cl}
+    \toprule{}
+    Intensity of Importance&Definition \\ \midrule{}
+    1                      &Equal Importance \\
+    2                      &Weak or slight \\
+    3                      &Moderate importance \\
+    4                      &Moderate plus \\
+    5                      &Strong importance \\
+    6                      &Strong plus \\
+    7                      &Very strong or demonstrated importance \\
+    8                      &Very, Very strong \\
+    9                      &Extreme importance \\ \bottomrule{}
+  \end{tabular}
+  \caption{The fundamental scale of absolute numbers}\label{important}
+\end{table}
 
 We then get the weight of each factor by calculating the bigest
-eigenvalue and it's corresponding eigenvector, as given in Table.
+eigenvalue and it's corresponding eigenvector, as given in Table \ref{weight}.
 
+\begin{table}
 \begin{center}
-\begin{tabular}{c|cccc}
-  Factor  &$A_{ac}$    &$A_{ab}$   &$A_{at}$    &$A_{po}$\\ \hline
-  Weight  &0.3805  &0.0709  &0.2371  &0.3030\\
+\begin{tabular}{ccccc} \toprule{}
+  Factor  &$A_{ac}$    &$A_{ab}$   &$A_{at}$    &$A_{po}$\\ \midrule{}
+  Weight  &0.3805  &0.0709  &0.2371  &0.3030\\ \bottomrule{}
 \end{tabular}
 \end{center}
+\caption{Weight for factors}\label{weight}
+\end{table}
 
 We test the consistency of the preferences for this instance of the
-AHP. For good consistency [Alonso and Lamata 2006, 446 - 447]:
+AHP.\@ For good consistency [Alonso and Lamata 2006, 446 - 447]:
 
 \begin{itemize}
 \item The principal eigenvalue $\lambda_{max}$ of the matrix should be
@@ -291,17 +309,6 @@ $$f_{ij,t}=\frac{\left|N_{i,t} \cap
 
 \end{itemize}
 
-Finally, we explain the concept of clustering coefficient [Duncan
-J. Watts and Steven Strogatz 1998] of $i$ denoted as $c_{i,t}$, which
-is a measure of the degree to which nodes in a graph tend to cluster
-together. $c_{i,t}$ is defined as:
-
-$$c_{i,t}=\dfrac{\left| \left\{ s_{jk,t}:v_j,v_k \in M_i,s_{jk,t} \in E
-    \right\} \right|}{k_{i,t}(k_{i,t}-1)}$$
-where
-$M_{i,t}=\left\{ v_j:s_{ij,t} \in E \and s_{ji,t} \in E \right\}$ and
-$k_{i,t}=\left| N_{i,t} \right|$.
-
 \subsection{Promote and Churn Model}
 \label{sec:promote-and-churn-model}
 
@@ -333,7 +340,26 @@ model update once according to the following rules:
   probability to churn with a churn rate $l$.
 \item [\textit{step 3}] Stay: If $i$ hasn't been promoted or churned,
   he will keep his job and do nothing.
+\item [\textit{step 4}] Recruit: Recruit for vacancies when all the
+  employees have done these 3 steps above.
 \end{itemize}
+
+\section{The Improved Model}
+\label{sec:the-improved-model}
+
+\subsection{Assumptions and Justifications}
+
+\begin{itemize}
+\item \textbf{assumption 1} For the promotion probability and
+  organization change, the other factors effects the churn probability
+  is invariable.
+
+Though churn derives from varieties of reasons and they are actually
+lacking of known conditions and data to estimate them, we have to
+regard it as stable in our model.
+\end{itemize}
+
+\subsection{Organizational Churn}
 
 The network of the company we've built changes in terms of
 orgnizational churn and promotion. Considering various of factors in
@@ -380,13 +406,22 @@ $l_{i3}$. As an orinigal condition,it satisfies
 
 Thus we can use Equation\ref{lambda} to calculate the churn rate $l_i$.
 
+\subsection{Productivity}
+
+First, we explain the concept of clustering coefficient [Duncan
+J. Watts and Steven Strogatz 1998] of $i$ denoted as $c_{i,t}$, which
+is a measure of the degree to which nodes in a graph tend to cluster
+together. $c_{i,t}$ is defined as:
+
+$$c_{i,t}=\dfrac{\left| \left\{ s_{jk,t}:v_j,v_k \in M_i,s_{jk,t} \in E
+    \right\} \right|}{k_{i,t}(k_{i,t}-1)}$$
+where
+$M_{i,t}=\left\{ v_j:s_{ij,t} \in E \and s_{ji,t} \in E \right\}$ and
+$k_{i,t}=\left| N_{i,t} \right|$.
+
+
 \section{Performance and Analysis}
 \label{sec:performance-and-analysis}
-
-\subsection{Analysis for Task 2}
-\label{sec:analysis-for-task-2}
-
-a
 
 \subsection{Analysis for Task 3}
 \label{sec:analysis-for-task-3}
@@ -410,7 +445,15 @@ Total Budget & Salary Budget & Training Budget & Recruiting Budget\\ \midrule
   \caption{Status of positions}\label{t4_p}
 \end{figure}
 
-To analyze the status of positions under different churn rate, we use our model to simulate dynamic processes with these churn rate constraints. We execute our program 100 times for each churn rate and average the predicted values. Figure \ref{t4_p} shows the averaged results our model predicted. Under all of these three conditions, the number of employees in the company keeps rising. The higher the churn rate, the lower the final full rate the company reaches after two years. But ICM can sustain its 80\% for positions even if the churn rate goes to 35\% according to our model's precition.
+To analyze the status of positions under different churn rate, we use
+our model to simulate dynamic processes with these churn rate
+constraints. We execute our program 100 times for each churn rate and
+average the predicted values. Figure \ref{t4_p} shows the averaged
+results our model predicted. Under all of these three conditions, the
+number of employees in the company keeps rising. The higher the churn
+rate, the lower the final full rate the company reaches after two
+years. But ICM can sustain its 80\% for positions even if the churn
+rate goes to 35\% according to our model's precition.
 
 \begin{figure}[htb]
   \centering
@@ -423,9 +466,27 @@ To analyze the status of positions under different churn rate, we use our model 
   \includegraphics[width=7cm]{task4_s.pdf}\\
   \caption{Training budget and salary budget}\label{t4_t_s}
 \end{figure}
-The churn rate effect the budget of the company as well. The three parts of the bugdet behave differently when churn rate increases. The calculated budget is shown in Figure \ref{t4_r} and Figure \ref{t4_t_s}. Each data point in three charts is an averaged result of 10 predictions and a linear trendline is added to each chart. It is clear that recruiting budget showed in Figure \ref{t4_r} is likely to be proportional to the churn rate while salary budget and training budget showed in Figure \ref{t4_t_s} are likely to be inversely proportional to the churn rate.
+The churn rate effect the budget of the company as well. The three
+parts of the bugdet behave differently when churn rate increases. The
+calculated budget is shown in Figure \ref{t4_r} and Figure
+\ref{t4_t_s}. Each data point in three charts is an averaged result of
+10 predictions and a linear trendline is added to each chart. It is
+clear that recruiting budget showed in Figure \ref{t4_r} is likely to
+be proportional to the churn rate while salary budget and training
+budget showed in Figure \ref{t4_t_s} are likely to be inversely
+proportional to the churn rate.
 
-To maintain enough employees, the company has to spend more on recruiting. So high turnover rate directly increase the recruiting budget. High turnover rate's effect on training budget and salary budget is more complex. On the one hand, when churn rate goes up, vacancies in the middle level keeps rising due to long recruiting time and low promote rate. On the other hand, the vacancies in lower level remains low because of the short recruiting time. So the full rate of the company decreases when churn rate rises. Since training budget and salary budget are closely related to full rate, both of them decrease when turnover rate goes up.
+To maintain enough employees, the company has to spend more on
+recruiting. So high turnover rate directly increase the recruiting
+budget. High turnover rate's effect on training budget and salary
+budget is more complex. On the one hand, when churn rate goes up,
+vacancies in the middle level keeps rising due to long recruiting time
+and low promote rate. On the other hand, the vacancies in lower level
+remains low because of the short recruiting time. So the full rate of
+the company decreases when churn rate rises. Since training budget and
+salary budget are closely related to full rate, both of them decrease
+when turnover rate goes up.
+
 \subsection{Analysis for Task 5}
 \label{sec:analysis-for-task-5}
 
@@ -456,9 +517,24 @@ We apply following changes to our model to simulate the required process:\\
         \end{center}
 \end{table}
 
-The result of simulation is shown in Figure \ref{t5_p} and Table \ref{t5_p_t}. All the data shown is an average of ten predictions. While the number of positions occupied remains stable with origial conditions, it drops remarkably with modified conditions.
+The result of simulation is shown in Figure \ref{t5_p} and Table
+\ref{t5_p_t}. All the data shown is an average of ten
+predictions. While the number of positions occupied remains stable
+with origial conditions, it drops remarkably with modified
+conditions.
 
-We list specific data of each level in Table \ref{t5_p_t}. In the modified case, the numbers of employees are lower than original case especially the those of middle levels. Since there is no external recruiting in modified case, it is obivious that the full rate will decrease due to employees' leave. Although some qualified employees can be promoted into higher level, the high churn rate of the middle level and difficulty of satisfying the promotion conditions make the numbers of middle level employees relatively low. The situation given in that task 5 will cause unrecoverable damage to ICM's HR health. With the full rate of middle level employees lower than 50\%, the HR structure is broken into fragments and the company won't be able to function normally.
+We list specific data of each level in Table \ref{t5_p_t}. In the
+modified case, the numbers of employees are lower than original case
+especially the those of middle levels. Since there is no external
+recruiting in modified case, it is obivious that the full rate will
+decrease due to employees' leave. Although some qualified employees
+can be promoted into higher level, the high churn rate of the middle
+level and difficulty of satisfying the promotion conditions make the
+numbers of middle level employees relatively low. The situation given
+in that task 5 will cause unrecoverable damage to ICM's HR
+health. With the full rate of middle level employees lower than 50\%,
+the HR structure is broken into fragments and the company won't be
+able to function normally.
 
 
 \section{Advice for HR}
