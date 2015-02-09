@@ -11,7 +11,7 @@
 \usepackage{fancyhdr}               %Below is the head of the article.
 \pagestyle{fancy}
 \usepackage{lastpage}
-\lhead{Team \# 30061}
+\lhead{Team \# 33131}
 \rhead{Page \thepage{} of \pageref{LastPage}}
 \cfoot{}
 %\numberwithin{equation}{section}    %Numbering of the equations will be based on sections.
@@ -29,8 +29,7 @@
 
 \begin{document}
 
-\title{}
-\date{}
+\title{Human Capital Model} \date{\today{}}
 \maketitle
 
 \tableofcontents
@@ -40,6 +39,14 @@
 \section{Introduction}
 \label{sec:introduction}
 
+Considering the shortage of the talent, it's essential for companys to
+retain good people and make them well-trained. However, current
+situation is not satisfactory while many talents always tend to get a
+good job via job-hopping, causing orgnizational churn in employees who
+are closely connected to them. In order to simulate this process and
+improve it, we build a human capital model based on Social Network
+Analysis and Markov process.
+
 \subsection{Restatement of the Problem}
 \label{sec:restatement-of-the-problem}
 
@@ -47,57 +54,346 @@
 \label{sec:literature-review}
 
 \begin{itemize}
-    \item
-    \item
-    \item
+\item
+\item
+\item
 \end{itemize}
 
 \section{Terminology}
 \label{sec:terminology}
 
 \begin{itemize}
-    \item
-    \item
-    \item
+\item
+\item
+\item
 \end{itemize}
 
 \section{Assumptions and Justifications}
 \label{sec:assumptions-and-justifications}
 
 \begin{itemize}
-    \item
-    \item
-    \item
+\item \textbf{assumption 1} If an employee has probability to
+  promote, he won't churn.
+
+The possibility of the unforeseen accidents, which could force an
+employee to leave his position,is neglected.Human nature, an employee
+will stay at his position to chase for higher level.
+
+\item \textbf{assumption 2} For a vacancy,if there exists an
+  employee measures up to it already,ICM won't recruit for it.
+
+Since recruiting good people is difficult, time consuming and
+expensive according to issue 5,it is wasteful to recruit for a
+position if an employee can promote to it.
+
+\item \textbf{assumption 3} Demotion won't occur.
+
+\item \textbf{assumption 4} Administrative clerk won't promote or be
+  transferred.
+
+\item \textbf{assumption 5} For the promotion probability and
+  organization change, the other factors effects the churn probability
+  is invariable.
+
+Though churn derives from varieties of reasons and they are actually
+lacking of known conditions and data to estimate them, we have to
+regard it as stable in our model.
+
+\item \textbf{assumption 6} Each division or office have at least one
+  middle manager or senior manager.
+
 \end{itemize}
 
-%the main section of the paper
-\section{}
-\label{sec:}
+% the main section of the paper
+\section{Human Capital Model}
+\label{sec:human-capital-model}
 
-%some other section of the paper
-\section{}
-\label{sec:}
+\subsection{Model Overview}
+\label{sec:model-overview}
+
+Most research for human capital can be classified as either
+microscopic and macroscopic. Since either macroscopic or microscopic
+methods are difficult to solve our problem perfectly, we approach the
+problem with the combination of macroscopic and microscopic methods.
+
+To measure the ability of each person, we use Quantitative Management
+Performance. Via this measurement, we can classify differient kinds of
+employees which will influence the promotion process.
+
+To build the employee network and analyze its properties, we employ
+the social network analysis (SNA) technique. In our case, the
+employees are viewed as nodes and relationships as links among
+them. So, We can simulate the complex relationship via this network.
+
+Definitions of symbols employed in this paper are listed in
+\textbf{Table 1}.
+\begin{table}
+\begin{tabular}{|l|l|}
+  Variable & Description \\
+  \hline
+  $i$            &Index of an employee \\
+  $L_{i,t}$          &The level of $i$ \\
+  $s_{ij,t}$        &The relation strength from $i$ to $j$ \\
+  $a_{ij,t}$        &Represent the influence caused by relationship
+                    between superior and subordinate \\
+  $f_{ij,t}$        &Represent the influence caused by relationship
+                    between person with many friends and person with
+                    few friends \\
+  $c_{i,t}$        &Clustering Coefficient of $i$
+\end{tabular}
+\end{table}
+
+\subsection{Human Performance Model}
+\label{sec:human-model}
+
+In this part, we buid a people model to evaluate an employee in four
+aspects, in terms of \textbf{Quantitative Management Performance} ---
+work achievement, work ability, work attitude and potential. These
+four aspects are supposed to be quantized according to annual
+evaluation based on performance as judged by the supervisor and we
+take these independent variables as $A_{ac_i}$, $A_{ab_1}$, $A_{at_i}$
+and $A_{po_i}$ for each employee $i$. For each of the four parameters,
+it goes from 0 to 1. The statues are used for calculating the
+probability that employee can promote. Meanwhile, they influence
+leaving probability and team cohesiveness as well.
+
+It is obvious that some of the parameters are somehow more important
+than others. So in an effort to make our model more accurate and
+reliable,we introduce a weighted index of deviation $AD_i$, with
+\begin{equation}
+  A_i=w_{ac} \cdot A_{ac_i} + w_{ab} \cdot A_{ab_i} + w_{at} \cdot A_{at_i} +
+  w_{po} \cdot A_{po_i}
+\end{equation}
+
+We determine weights via the Analytical Hierarchy Process(AHP) [Saaty
+1982]. We build a $4 \times 4$ reciprocal matrix by pair comparison:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+       &$A_{ac}$      &$A_{ab}$  &$A_{at}$    &$A_{po}$  \\ \hline
+ $A_{ac}$ & 1           & 5 & 2            &1            \\ \hline
+ $A_{ab}$ &$\frac{1}{5}$ & 1 &$\frac{1}{3}$ & $\frac{1}{4}$\\ \hline
+ $A_{at}$ &$\frac{1}{2}$ & 3 & 1            &1            \\ \hline
+ $A_{po}$ &1            & 4 & 1            &1            \\ \hline
+\end{tabular}
+\end{center}
+
+The meaning of the number in each cell is explained in []. The numbers
+themselves are based on our own subjective decisions.
+
+We then get the weight of each factor by calculating the bigest
+eigenvalue and it's corresponding eigenvector, as given in Table.
+
+\begin{center}
+\begin{tabular}{c|cccc}
+  Factor  &$A_{ac}$    &$A_{ab}$   &$A_{at}$    &$A_{po}$\\ \hline
+  Weight  &0.3805  &0.0709  &0.2371  &0.3030\\
+\end{tabular}
+\end{center}
+
+We test the consistency of the preferences for this instance of the
+AHP. For good consistency [Alonso and Lamata 2006, 446 - 447]:
+
+\begin{itemize}
+\item The principal eigenvalue $\lambda_{max}$ of the matrix should be
+  close to the number n of alternatives, here 4; we get $\lambda_{max} = 4.047$.
+\item The consistency index $CI = (\lambda_{max}-n)/(n-1)$ should be close to 0; we get $CI = 0.0157$.
+\item The consistency ratio $CR = CI/RI$ (where RI is the average
+  value of CI for random matrices) should be less than 0.1; we get $CR
+  = 0.0182$.
+\end{itemize}
+
+Hence, our decision method displays perfectly acceptable consistency
+and the weights are reasonable.
+
+\subsection{Social Network Model}
+\label{sec:social-network-model}
+
+The social network model contains a directed weighted graph $G(V,E)$
+in which $V$ denote the employees and $E$ denote the connection
+between employees. Since there are personnel changes, $G(V,E)$ will
+change with time goes by. In order to simulate this situation, we use
+$G_t(V_t,E_t)$ instead of $G(V,E)$ where $t$ is a discrete
+variable. So $G_t(V_t,E_t)$ denote the social network in the $t$-th
+month.
+
+First, we explain the way we build edges of $G_t(V_t,E_t)$.
+
+When $t = 0$, there are about $370 \times 85\%$ nodes (employees) in
+$G_t$. We build edges between employees in the same division or
+office, since employees in the same division or office certainly know
+each other. So each division or office form a complete graph and
+employees in the differient division or office don't know others,
+which is impossible. To solve this problem, we build 10 edges for each
+employee with employees in other divisions with equal
+probability. Then we build the other edges with probability
+$p = \frac{\left|N_{i,t} \cap N_{j,t}\right|}{\left|N_{i,t} \cup
+    N_{j,t}\right|}$
+which is called Jaccard similarity coefficient[Jaccard 1901].
+
+When $t > 0$, there will be employees leaving or joining the
+company. If an employee leave, all his edges with other employees with
+be deleted. If an employee newly join the company, he will follow
+steps which employees at $t = 0$ take. This is the dynamic process of
+graph $G_t(V_t,E_t)$.
+
+Let $s_{ij,t}$ denote the weight from $i$ to $j$ at time $t$. We have
+these properties of $G_t(V_t,E_t)$:
+
+\begin{itemize}
+\item $s_{ij,t} \ne s_{ij,t}$
+
+  We made this graph directed and weighted because one person may
+  consider another person his best friend while that person doesn't
+  consider him a good friend. This situation may appear because of the
+  relationship between superior and subordinate and the relationship
+  between person with more friend and person with less friend. In
+  general, $s_{ij,t} \ne s_{ij,t}$ for the reason above.
+
+\item $s_{ij,t}=\dfrac{a_{ij,t}+f_{ij,t}}{2}$
+
+  $a_{ij,t}$ denote the influence caused by the relationship between
+  superior and subordinate, $f_{ij,t}$ denote the influence caused by
+  the amount of friends for $i$ and $j$. We define
+$$a_{ij,t}=\begin{cases}
+  \frac{1}{2+\left|L_{i,t}-L_{j,t}\right|}, & L_{i,t} \ge L_{j,t} \\
+  1-\frac{1}{2+\left|L_{i,t}-L_{j,t}\right|}, & L_{i,t} < L_{j,t} \\
+\end{cases}$$
+, where $L_{i,t}$ denote the level of $i$ at time $t$, and
+$$f_{ij,t}=\frac{\left|N_{i,t} \cap
+    N_{j,t}\right|}{\left|N_{i,t}\right|}$$.
+
+\end{itemize}
+
+Finally, we explain the concept of clustering coefficient [Duncan
+J. Watts and Steven Strogatz 1998] of $i$ denoted as $c_{i,t}$, which
+is a measure of the degree to which nodes in a graph tend to cluster
+together. $c_{i,t}$ is defined as:
+
+$$c_{i,t}=\dfrac{\left| \left\{ s_{jk,t}:v_j,v_k \in M_i,s_{jk,t} \in E
+    \right\} \right|}{k_{i,t}(k_{i,t}-1)}$$
+where
+$M_{i,t}=\left\{ v_j:s_{ij,t} \in E \and s_{ji,t} \in E \right\}$ and
+$k_{i,t}=\left| N_{i,t} \right|$.
+
+\subsection{Promote and Churn Model}
+\label{sec:promote-and-churn-model}
+
+The main part of our model is the algorithm which controls the
+behavior of employees. According to assumption 1 and assumption 2, we
+have the methodology as follow:
+
+\begin{itemize}
+\item [\textit{step 1}]
+\end{itemize}
+
+The network of the company we've built changes in terms of
+orgnizational churn and promotion. Considering various of factors in
+reality, we build an orgnizational churn and promotion model to
+predict the dynamic process.
+
+The first part of the model is churn model.We define the churn rate of
+an employee $i$ as $l_i$ to evaluate the probability to churn. $l_i$ is
+usually controlled by sorts of factors to different degrees. We
+divides $l_i$ into three parts:$l_{i1}$, $l_{i2}$ and$l_{i3}$.  $l_{i1}$
+represents the churn rate because of lacking of promotion
+opportunity. $l_{i2}$ represents the churn rate because of the changes
+of other employees related to employee $i$. To simplify our model, we
+presume that $l_i1$, $l_i2$ is linear correlated with $(1-p_i)$ and
+$s_i$, which means
+
+\begin{equation}
+  l_{i1}=\lambda_1(1-p_i),l_{i2}=\lambda_2s_i
+\end{equation}
+
+$\lambda_1$ and $\lambda_2$ could be ensured in later calculation.
+
+$l_{i3}$ represents the other factors we can't get any information from
+the known conditons so that we regard it as stable.  Thus
+
+\begin{equation}
+  l_i = \lambda_1(1-p_i) + \lambda_2s_i +l_i3
+\end{equation}
+
+After analyzing a great deal of churn rate reports, we get the
+composition of the three parts are 10.9\%, 2.2\% and 75.4\%
+respectively. According to the percentage and the general
+churn rate 18\%, we can calculate $\lambda_1$, $\lambda_2$ and
+$l_{i3}$. As an orinigal condition,it satisfies
+
+\begin{equation}
+\begin{cases}
+  \lambda_1 \sum_{i=1}^{370}(1-p_i)=10.9\% \times 370 \times 1.5\% \\
+  \lambda_2 \sum_{i=1}^{370}s_i=2.2\% \times 370 \times 1.5\% \\
+  l_i3=1.5 \% \times 75.4 \%
+\end{cases}
+\end{equation}
+
+Thus we can use equation (4) to calculate the churn rate $l_i$.
+
+The second part of the model is promotion model aimed to predict the
+promotion condition.We define the promotion rate of an employee i as
+$p_i$ to evaluate the probability to promote.As a matter of fact,if
+there is a vacancy, judging if an employee suits the site involves
+work experience and ability.It is essential that he is supposed to
+have several years of work experience according to issue 6.If an
+employee satisfies the experience condition,it turns out to think
+about his ability.Since in people model,each employee's ability is
+evaluated by a parameter $A_{D_i}$. For each level of position,it has
+an ability standard,as shows in Figure[]. The ability of an employee
+are supposed to reach the four standard parameters
+respectively,otherwise its $p_i$ is 0.For those who reach the
+standard, the promotion probability can be calculated by the equation:
+$p_i =\dfrac{A_{D_i}}{\sum_{\alpha} A_{D_\alpha}}$ where $\alpha$ is
+employee who have probability to promote.
 
 \section{Performance and Analysis}
 \label{sec:performance-and-analysis}
 
-\subsection{General Performance}
-\label{sec:general-performance}
+\subsection{Analysis for Task 2}
+\label{sec:analysis-for-task-2}
 
-\subsubsection*{Results and Analysis}
+a
 
-%some more specific results and analysis
-\subsection{}
-\label{sec:}
+\subsection{Analysis for Task 3}
+\label{sec:analysis-for-task-3}
 
-\subsubsection*{Results and Analysis}
+a
+
+\subsection{Analysis for Task 4}
+\label{sec:analysis-for-task-4}
+
+a
+
+\subsection{Analysis for Task 5}
+\label{sec:analysis-for-task-5}
+
+a
+
+\section{Advice for HR}
+\label{sec:advice-for-hr}
+
+a
+
+\subsection{Incentive Mechanism}
+\label{sec:incentive-machanism}
+
+a
+
+\subsection{Matching Employees to the Right Position}
+\label{sec:matching-employees-to-the-right-position}
+
+a
+
+\section{Team Science}
+\label{sec:team-science}
+
+a
 
 \section{Sensitivity Analysis}
 \label{sec:sensitivity-analysis}
 
-%for some improvement of the problem
-\section{}
-\label{sec:}
+a
 
 \section{Strengths and Weaknesses}
 \label{sec:strengths-and-weaknesses}
@@ -106,24 +402,29 @@
 \label{sec:strengths}
 
 \begin{itemize}
-    \item
-    \item
-    \item
+\item Our model make fully use of the theory of multilayer networks so
+  that it quantizes the relation accurately and reasonablly.
+\item Our model exellently proves the interaction among these
+  factors:leave probability, promotion probability and productivity.
+\item The network we built include both microcosmic part and
+  macrocosmic part, and they react to each other.
+\item Our model proves the effection of time.
 \end{itemize}
 
 \subsection*{Weaknesses}
 \label{sec:weaknesses}
 
 \begin{itemize}
-    \item
-    \item
-    \item
+\item Limited by the time,we neglected sorts of factors which are not so significant.In fact, the model still has space to be perfected.
+\item The result has some randomness.
 \end{itemize}
 
 \section{Conclusions}
 \label{sec:conclusions}
 
-%the reference
+a
+
+% the reference
 \begin{thebibliography}{99}
 
 \bibitem{}

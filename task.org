@@ -1,13 +1,16 @@
 * DONE [#A] 确定题目
 CLOSED: [2015-02-06 五 11:27] DEADLINE: <2015-02-06 五 12:00>
 - State "DONE"       from "TODO"       [2015-02-06 五 11:27]
-* TODO [#A] 查找文献
-DEADLINE: <2015-02-07 六 00:00>
-* TODO 模型 [/]
-** TODO [#A] 建立模型
-DEADLINE: <2015-02-07 六 12:00>
-** TODO [#A] 编写初步代码
-DEADLINE: <2015-02-08 日 00:00>
+* DONE [#A] 查找文献
+CLOSED: [2015-02-07 六 21:28] DEADLINE: <2015-02-07 六 00:00>
+- State "DONE"       from "TODO"       [2015-02-07 六 21:28]
+* TODO 模型 [2/5]
+** DONE [#A] 建立模型
+CLOSED: [2015-02-07 六 21:28] DEADLINE: <2015-02-07 六 12:00>
+- State "DONE"       from "TODO"       [2015-02-07 六 21:28]
+** DONE [#A] 编写初步代码
+CLOSED: [2015-02-07 六 21:28] DEADLINE: <2015-02-08 日 00:00>
+- State "DONE"       from "TODO"       [2015-02-07 六 21:28]
 ** TODO [#B] 改进模型
 DEADLINE: <2015-02-08 日 00:00>
 ** TODO [#B] 改进模型代码
