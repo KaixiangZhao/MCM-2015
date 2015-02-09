@@ -451,7 +451,14 @@ probabilities to churn.
 
 At time $t$, we choose top 10\% of the employees which have the
 properties above and decrease their churn rate by 50\%. As shown in
-Figure\ref{}, the churn rate decrease rapidly.
+Figure\ref{churn-rate}, the churn rate decrease rapidly.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=11cm]{p4.pdf}
+  \caption{Churn rate-Time Curve}
+  \label{churn-rate}
+\end{figure}
 
 \subsection{Matching Employees to the Right Position}
 \label{sec:matching-employees-to-the-right-position}
@@ -482,7 +489,7 @@ describe this problem as a mathematical programming problem:
   \min&\sum_{i=1}^n\sum_{j=1}^m m_{ij}x_{ij} \\
   s.t.& \sum_{j=1}^m x_{ij}=1, i=1,2,\ldots,n \\
   &\sum_{i=1}^n x_{ij} \le1,j=1,2,\ldots,m \\
-  &x_{ij}=0 \mbox{or} 1,i=1,2,\ldots,n,j=1,2,\ldots,m
+  &x_{ij}=0 \mbox{ or } 1,i=1,2,\ldots,n,j=1,2,\ldots,m
   \end{split}
 \end{equation}
 
@@ -495,9 +502,9 @@ and without reassignment. We can find that the productivity increase
 rapidly after reassign employees, which means reassignment truly help
 with productivity of the company.
 
-\begin{figure}[center]
+\begin{figure}[htb]
   \centering
-
+  \includegraphics[width=11cm]{p3.pdf}
   \caption{Productivity-Time Curve}\label{reassign}
 \end{figure}
 
@@ -509,7 +516,7 @@ layers such as information flow, trust, influence, and
 friendship. Number the layers from 0 to
 k. $$G^\alpha=(V^\alpha,E^\alpha), \alpha=1,2,\ldots,k$$ Each
 $E^\alpha$ is colored by a specific color. $G^0$ reprensents the
-network we built before, $G^1$, $G^2, \ldots ,G^k$ represent the other layers added.
+network we built before, $G^1, G^2, \ldots ,G^k$ represent the other layers added.
 
 Still, in each network layer $G_\alpha$, $N_i$ represents emploee
 $i$. The edge $e_{ij}$ connects between two nodes $N_i$ and
