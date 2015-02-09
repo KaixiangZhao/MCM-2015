@@ -2,6 +2,9 @@
 %\usepackage[doublespacing]{setspace}
 \usepackage[utf8]{inputenc}         %This is used for ASKII digits.
 \usepackage{amsmath, amssymb}       %This is for mathematic statements,check"amath.colorado.edu/documentation/LaTex/Symbols.pdf"
+\usepackage{booktabs}
+\usepackage{caption2}
+\usepackage{epstopdf}
 \usepackage{amsfonts,mathrsfs}      %fonts~~
 \usepackage{graphicx}               %This is for graph inserting.
 \usepackage{paralist}               %Give me compact lists!!!!! 'compactitem' 'compactenum' 'compactdesc'
@@ -10,7 +13,6 @@
 \usepackage{indentfirst}            %Indent the first letter
 \usepackage{fancyhdr}               %Below is the head of the article.
 \pagestyle{fancy}
-\usepackage{booktabs}
 \usepackage{lastpage}
 \lhead{Team \# 33131}
 \rhead{Page \thepage{} of \pageref{LastPage}}
@@ -24,6 +26,7 @@
 %\theoremstyle{remark}
 %\newtheorem*{remark}{Remark}
 \newcommand{\boldit}[1]{\textbf{\textit{#1}}}
+\renewcommand{\captionlabelfont}{\small \bfseries \rmfamily}
 \usepackage{float}
 \usepackage{paralist}
 \usepackage{url}
@@ -51,47 +54,22 @@ Analysis and Markov process.
 \subsection{Restatement of the Problem}
 \label{sec:restatement-of-the-problem}
 
-Problem C describe ICM as an orginaization of 370 people on human
-capital. The company is facing some issues. ICM tend to make a
-positive work atmosphere to gain the loyalty of an employee in their
-early time.The churn of an some employee makes effect on productivity
-and emotion on other employee. Lower quality employees often stay with
-the company for a full career. The churn rate is 18\% per year and
-mid-level positions suffer high  churn rate, even twice the average
-rate of the rest of the company. HR prefer matching employees to the
-right position. It only provides promotion opportunity for those who
-have several years of work experience. ICM usually has only 85\% of
-its 370 positions filled at any time and HR office is actively hiring
-about 8\%-10\% of the ICM positions. The CEO salary is approximately
-10 times the median of the salaries of all the employees, compared to
-hundreds of times the median as found in many companies.
-
-There are several tasks we need to finish according to our model:
+\subsection{Literature Review}
+\label{sec:literature-review}
 
 \begin{itemize}
-\item Build a Human Capital network model of ICM organization’s
-  personnel situation.
+\item
+\item
+\item
+\end{itemize}
 
-\item Identify dynamic processes within the Human Capital network,
-  which includes orginizatinal churn and direct and indirect effects on
-  the organization’s productivity.
+\section{Terminology}
+\label{sec:terminology}
 
-\item Analyze your organization’s budget requirements over the next 2
-  years.
-
-\item Judge if ICM could sustain its 80\% full status for positions if
-  the annual churn rate for all positions goes to 25\% and 35\%
-  respectively. Calculate the costs of these higher turnover rates and
-  describe the indirect effects of these high churn rates.
-
-\item Simulate the impact of 30\% churn in both junior managers and
-  experienced supervisors, if other churn values remain at 18\%.It
-  assumes that there is no external recruiting and ICM promote only
-  qualified employees for the next two years.
-
-\item Connect our Human Capital network to other organizational
-  network layers such as information flow, trust, influence, and
-  friendship that the other offices of ICM are considering building.
+\begin{itemize}
+\item
+\item
+\item
 \end{itemize}
 
 \section{Assumptions and Justifications}
@@ -177,7 +155,7 @@ aspects, in terms of \textbf{Quantitative Management Performance} ---
 work achievement, work ability, work attitude and potential. These
 four aspects are supposed to be quantized according to annual
 evaluation based on performance as judged by the supervisor and we
-take these independent variables as $A_{ac_i}$, $A_{ab_i}$, $A_{at_i}$
+take these independent variables as $A_{ac_i}$, $A_{ab_1}$, $A_{at_i}$
 and $A_{po_i}$ for each employee $i$. For each of the four parameters,
 it goes from 0 to 1. The statues are used for calculating the
 probability that employee can promote. Meanwhile, they influence
@@ -305,34 +283,12 @@ $k_{i,t}=\left| N_{i,t} \right|$.
 \subsection{Promote and Churn Model}
 \label{sec:promote-and-churn-model}
 
-First, we explain the model of promotion aimed to predict the
-promotion probability. We define the promotion rate of $i$ as
-$p_i$ to evaluate the probability to promote. As a matter of fact, if
-there is a vacancy, judging if an employee suits the site involves
-work experience and ability. It is essential that he is supposed to
-have several years of work experience according to issue 6. If an
-employee satisfies the experience condition, it turns out to think
-about his ability. Since in Human Performance Model, each employee's
-ability is evaluated by a parameter $A_{D_i}$. For each level of
-position, it has an ability standard, as shows in Table[]. The ability
-of an employee are supposed to reach the four standard parameters
-respectively, otherwise its $p_i$ is 0. For those who reach the
-standard, the promotion probability can be calculated by the equation:
-$p_i =\dfrac{A_{D_i}}{\sum_{\alpha} A_{D_\alpha}}$ where $\alpha$ represent
-employee who have probability to promote.
-
-According to assumption 1 and assumption 2, from $t$ to $t+1$, the
-model update once according to the following rules:
+The main part of our model is the algorithm which controls the
+behavior of employees. According to assumption 1 and assumption 2, we
+have the methodology as follow:
 
 \begin{itemize}
-\item [\textit{step 1}] Promotion: If there's a vacancy in superior
-  and $i$ has the ability to occupy this position, let $L_{i+1,t} =
-  L_{i,t}+1$ with probability mentioned above and build edges between
-  $i$ and his new colleagues.
-\item [\textit{step 2}] Churn: If $i$ isn't promoted, he will have the
-  probability to churn with a churn rate $l$.
-\item [\textit{step 3}] Stay: If $i$ hasn't been promoted or churned,
-  he will keep his job and do nothing.
+\item [\textit{step 1}]
 \end{itemize}
 
 The network of the company we've built changes in terms of
@@ -370,15 +326,30 @@ churn rate 18\%, we can calculate $\lambda_1$, $\lambda_2$ and
 $l_{i3}$. As an orinigal condition,it satisfies
 
 \begin{equation}
-\label{lambda}
 \begin{cases}
-  \lambda_1 \sum_{i=1}^{370}(1-p_i) & =10.9\% \times 370 \times 1.5\% \\
-  \lambda_2 \sum_{i=1}^{370}s_i & =2.2\% \times 370 \times 1.5\% \\
-  l_{i3} & =1.5 \% \times 75.4 \%
+  \lambda_1 \sum_{i=1}^{370}(1-p_i)=10.9\% \times 370 \times 1.5\% \\
+  \lambda_2 \sum_{i=1}^{370}s_i=2.2\% \times 370 \times 1.5\% \\
+  l_i3=1.5 \% \times 75.4 \%
 \end{cases}
 \end{equation}
 
-Thus we can use Equation\ref{lambda} to calculate the churn rate $l_i$.
+Thus we can use equation (4) to calculate the churn rate $l_i$.
+
+The second part of the model is promotion model aimed to predict the
+promotion condition.We define the promotion rate of an employee i as
+$p_i$ to evaluate the probability to promote.As a matter of fact,if
+there is a vacancy, judging if an employee suits the site involves
+work experience and ability.It is essential that he is supposed to
+have several years of work experience according to issue 6.If an
+employee satisfies the experience condition,it turns out to think
+about his ability.Since in people model,each employee's ability is
+evaluated by a parameter $A_{D_i}$. For each level of position,it has
+an ability standard,as shows in Figure[]. The ability of an employee
+are supposed to reach the four standard parameters
+respectively,otherwise its $p_i$ is 0.For those who reach the
+standard, the promotion probability can be calculated by the equation:
+$p_i =\dfrac{A_{D_i}}{\sum_{\alpha} A_{D_\alpha}}$ where $\alpha$ is
+employee who have probability to promote.
 
 \section{Performance and Analysis}
 \label{sec:performance-and-analysis}
@@ -391,144 +362,95 @@ a
 \subsection{Analysis for Task 3}
 \label{sec:analysis-for-task-3}
 
-a
+We assume that the company offers training programs for its employees monthly and newly hired employees start to get their salaries next month after they enter the company. With these two assumption, results can be drawn according to our model through simulation. 
+
+Budget can be divided into threee parts: salary budget, training budget and recruiting budget. The budget requirement predicted for next two years is listed in the table below in terms of $\sigma$. 
+
+\begin{tabular}{*{4}{c}}\toprule[2pt]
+Total Budget & Salary Budget & Training Budget & Recruiting Budget\\ \midrule
+1170.8$\sigma$ & 951.387$\sigma$ & 164.423$\sigma$ & 55.08$\sigma$ \\ \bottomrule[2pt]
+\end{tabular}
 
 \subsection{Analysis for Task 4}
 \label{sec:analysis-for-task-4}
 
-a
 
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10cm]{task4_p.pdf}\\
+  \caption{Status of positions}\label{t4_p}
+\end{figure}
+
+To analyze the status of positions under different churn rate, we use our model to simulate dynamic processes with these churn rate constraints. We execute our program 100 times for each churn rate and average the predicted values. Figure \ref{t4_p} shows the averaged results our model predicted. Under all of these three conditions, the number of employees in the company keeps rising. The higher the churn rate, the lower the final full rate the company reaches after two years. But ICM can sustain its 80\% for positions even if the churn rate goes to 35\% according to our model's precition.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10cm]{task4_r.pdf}\\
+  \caption{Recruiting budget}\label{t4_r}
+\end{figure}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=7cm]{task4_t.pdf}
+  \includegraphics[width=7cm]{task4_s.pdf}\\
+  \caption{Training budget and salary budget}\label{t4_t_s}
+\end{figure}
+The churn rate effect the budget of the company as well. The three parts of the bugdet behave differently when churn rate increases. The calculated budget is shown in Figure \ref{t4_r} and Figure \ref{t4_t_s}. Each data point in three charts is an averaged result of 10 predictions and a linear trendline is added to each chart. It is clear that recruiting budget showed in Figure \ref{t4_r} is likely to be proportional to the churn rate while salary budget and training budget showed in Figure \ref{t4_t_s} are likely to be inversely proportional to the churn rate. 
+
+To maintain enough employees, the company has to spend more on recruiting. So high turnover rate directly increase the recruiting budget. High turnover rate's effect on training budget and salary budget is more complex. On the one hand, when churn rate goes up, vacancies in the middle level keeps rising due to long recruiting time and low promote rate. On the other hand, the vacancies in lower level remains low because of the short recruiting time. So the full rate of the company decreases when churn rate rises. Since training budget and salary budget are closely related to full rate, both of them decrease when turnover rate goes up.
 \subsection{Analysis for Task 5}
 \label{sec:analysis-for-task-5}
-a
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=10cm]{task5_p.pdf}\\
+  \caption{Status of position}\label{t5_p}
+\end{figure}
+We apply following changes to our model to simulate the required process:\\
+\begin{itemize}
+\item Change the churn rate of junior managers and experienced supervisors to 30\%
+\item Prohit external recruiting
+\item Promoting only qualified employees
+\end{itemize}
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cc}\toprule[2pt]
+		\bfseries Level of Position & \bfseries Modified & \bfseries Original\\ \midrule
+		Senior manager/Executive & 5.6 & 8.4\\
+		Junior manager/Executive & 9.0 & 18.4\\
+		Experienced supervisor & 7.4 & 23.0\\
+		Inexperienced supervisor & 9.2 & 23.2\\
+		Experienced employee & 72.6 & 107.4\\
+		Inexperienced employee & 99.6 & 149.6\\
+		Administrative clerk & 24.0 & 24.0\\ \bottomrule[2pt]
+		\end{tabular}
+		\caption{Status of position}\label{t5_p_t}
+	\end{center}
+\end{table}
+
+The result of simulation is shown in Figure \ref{t5_p} and Table \ref{t5_p_t}. All the data shown is an average of ten predictions. While the number of positions occupied remains stable with origial conditions, it drops remarkably with modified conditions.  
+
+We list specific data of each level in Table \ref{t5_p_t}. In the modified case, the numbers of employees are lower than original case especially the those of middle levels. Since there is no external recruiting in modified case, it is obivious that the full rate will decrease due to employees' leave. Although some qualified employees can be promoted into higher level, the high churn rate of the middle level and difficulty of satisfying the promotion conditions make the numbers of middle level employees relatively low. The situation given in that task 5 will cause unrecoverable damage to ICM's HR health. With the full rate of middle level employees lower than 50\%, the HR structure is broken into fragments and the company won't be able to function normally. 
+ 
 
 \section{Advice for HR}
 \label{sec:advice-for-hr}
 
-As the HR manager faces many problems such as identifying those that
-are likely to churn and maximizing employees' knowledge and
-abilities, we explain our further improved model.
+a
 
 \subsection{Incentive Mechanism}
 \label{sec:incentive-machanism}
 
-A worker is more likely to churn if he or she was connected to other
-former employees who have churned. So there are two kinds of people
-who should be highly paid attention to and incented.
-
-First, we should pay attention to those who have more friends than
-others. Because of their wide connection with other employees, the
-consequence of their churn may be destructive, which cause many
-friends' churn.
-
-Second, we focus on those having more friends who have churned
-during the past year. This kind of people have a great probability to
-churn because of the influence of others.
-
-We choose one sample in our simulations and 50 people in this sample
-to explain our incentive mechanism.
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=7cm]{p1.eps}
-  \includegraphics[width=7cm]{p2.eps}
-  \caption{employees should be pay attention
-    to}\label{incentive-mechanism}
-\end{figure}
-
-In Figure\ref{incentive-mechanism}, as we can see, each vertex
-represents an employee, each full line represents a relation between 2
-employees, each imaginary line represent an relation between person
-who is on the job and person who churn. There are 5
-employees in left graph we should pay attention to which are
-43, 97, 123, 265 and 301 because they have more full lines than
-others. There are 6 employees in the right graph we should pay
-attention to which are 154, 175, 181, 182, 235 and 255 because they
-have more imaginary lines than others.
-
-We provide incentives to these employees which will decrease their
-probabilities to churn.
-
-At time $t$, we choose top 10\% of the employees which have the
-properties above and decrease their churn rate by 50\%. As shown in
-Figure\ref{}, the churn rate decrease rapidly.
+a
 
 \subsection{Matching Employees to the Right Position}
 \label{sec:matching-employees-to-the-right-position}
 
-We consider different abilities of different employees. As we have an
-annual evaluation based on performance for each employee and each
-division or office has it's necessarily needed abilities, we can match
-employees with their most suitable position.
-
-Because the evaluation is given annually, we reassign employees
-annually according to their abilities and the formula below:
-
-\begin{equation}
-m_{i,j} =
-{(A_{ac_i}-B_{ac_j})}^2 + {(A_{ab_i}-B_{ab_j})}^2 + {(A_{at_i}-B_{at_j})}^2
-+ {(A_{po_i}-B_{po_j})}^2
-\end{equation}
-
-where $B_{ac_j}$, $B_{ab_j}$, $B_{at_j}$, $B_{po_j}$ represent the
-abilities needed for position $j$.
-
-Defining $x_{ij}=\begin{cases} 1 , & \mbox{reassign employee } i
-  \mbox{ to position } j \\ 0,&\mbox{otherwise} \end{cases}$, we can
-describe this problem as a mathematical programming problem:
-
-\begin{equation}
-  \begin{split}
-  \min&\sum_{i=1}^n\sum_{j=1}^m m_{ij}x_{ij} \\
-  s.t.& \sum_{j=1}^m x_{ij}=1, i=1,2,\ldots,n \\
-  &\sum_{i=1}^n x_{ij} \le1,j=1,2,\ldots,m \\
-  &x_{ij}=0 \mbox{or} 1,i=1,2,\ldots,n,j=1,2,\ldots,m
-  \end{split}
-\end{equation}
-
-We can solve this problem via Kuhn–Munkres algorithm [Harold Kuhn and
-James Munkres 1957] whose time complexity is $O(n^4)$.
-
-We reassign them once a year according to their
-evaluation. Figure\ref{reassign} shows productivity with reassignment
-and without reassignment. We can find that the productivity increase
-rapidly after reassign employees, which means reassignment truly help
-with productivity of the company.
-
-\begin{figure}[center]
-  \centering
-
-  \caption{Productivity-Time Curve}\label{reassign}
-\end{figure}
+a
 
 \section{Team Science}
 \label{sec:team-science}
 
-This part shows how our model connects to other organizational network
-layers such as information flow, trust, influence, and
-friendship. Number the layers from 0 to
-k. $$G^\alpha=(V^\alpha,E^\alpha), \alpha=1,2,\ldots,k$$ Each
-$E^\alpha$ is colored by a specific color. $G^0$ reprensents the
-network we built before, $G^1$, $G^2, \ldots ,G^k$ represent the other layers added.
-
-Still, in each network layer $G_\alpha$, $N_i$ represents emploee
-$i$. The edge $e_{ij}$ connects between two nodes $N_i$ and
-$N_j$. Each edge has a value $w_{ij}^\alpha$ proving the weight of
-edge $e_{ij}^\alpha$, positive correlated to the strength of
-connection between two employees in network layers $\alpha$. Then we
-connect these network layers together to built a general network
-$G_e=(V, E, C)$, V is node set, C is color set, $E\subst V\times
-V\times C$ is edge set. In the general model, different layers effects
-each other. Take for example, if the friendship between employee $i$
-and employee $j$ is deeper, with other conditions the same,their
-information flow is more fluent. $w_{ij}^\alpha$ is changing with time
-flows and G_e is a dynamic network.
-
-However, human capital network make the maily effect on other network
-layers. In the general network, if an empolyee churns or is
-reassigned, the edge related to him will change. That is,
-$w_{ij}^\alpha$ get a new value for all $\alpha$. Hence, human capital
-network takes the lead in this effort.
+a
 
 \section{Sensitivity Analysis}
 \label{sec:sensitivity-analysis}
@@ -567,19 +489,7 @@ a
 % the reference
 \begin{thebibliography}{99}
 
-\bibitem{} Huang Y. A Study of the Performance Assessment of State-owned Power Enterprisees[D]. Tianjing University, 2010.
-
-\bibitem{} Journal T E D O T. The Investigation Report of the Condition of employee churn in 2011[J]. China New Time, 2012(2).
-
-\bibitem{} Zhang J. The Empirical Research of the Factors effecting employee churn in Resource-oriented Enterprise in Yuncheng,Shandong [D]. Southerneast University, 2014.
-
-\bibitem{} MEJNewman. The Structure and Function of Complex Networks[D]. University of Michigan, 2003.
-
-\bibitem{} Fang J, Zheng Z, Bi Q, etal. A Brand-new
-  Interdisciplinary Science: Network Science (Part One)[J]. Progress in Physics, 2007, 27(3).
-
-\bibitem{} Fang J, Zheng Z, Bi Q, etal. A Brand-new
-  Interdisciplinary Science: Network Science (Part Two)[J]. Progress in Physics, 2007, 27(4).
+\bibitem{}
 
 \end{thebibliography}
 
