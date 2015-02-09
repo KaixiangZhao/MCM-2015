@@ -406,6 +406,22 @@ $l_{i3}$. As an orinigal condition,it satisfies
 
 Thus we can use Equation\ref{lambda} to calculate the churn rate $l_i$.
 
+Analyzing the consequence of this phenomenon, we use our program to
+simulate this process. As a result, we find a organizational churn in
+our simulation as shown in Figure \ref{organizational-churn}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4cm]{Pic3_0.png}
+  \includegraphics[width=4cm]{Pic3_1.png}
+  \includegraphics[width=4cm]{Pic3_2.png}
+  \includegraphics[width=4cm]{Pic3_3.png}
+  \includegraphics[width=4cm]{Pic3_4.png}
+  \caption{Organizational Churn}\label{organizational-churn}
+\end{figure}
+
+The black spots in the graph denote employees who have churned
+
 \subsection{Productivity}
 
 First, we explain the concept of clustering coefficient [Duncan
@@ -590,7 +606,7 @@ Figure\ref{churn-rate}, the churn rate decrease rapidly.
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=11cm]{p4.pdf}
+ % \includegraphics[width=11cm]{p4.pdf}
   \caption{Churn rate-Time Curve}
   \label{churn-rate}
 \end{figure}
@@ -659,12 +675,12 @@ $N_j$. Each edge has a value $w_{ij}^\alpha$ proving the weight of
 edge $e_{ij}^\alpha$, positive correlated to the strength of
 connection between two employees in network layers $\alpha$. Then we
 connect these network layers together to built a general network
-$G_e=(V, E, C)$, V is node set, C is color set, $E\subst V\times
+$G_e=(V, E, C)$, V is node set, C is color set, $E \subset  V\times
 V\times C$ is edge set. In the general model, different layers effects
 each other. Take for example, if the friendship between employee $i$
 and employee $j$ is deeper, with other conditions the same,their
 information flow is more fluent. $w_{ij}^\alpha$ is changing with time
-flows and G_e is a dynamic network.
+flows and $G_e$ is a dynamic network.
 
 However, human capital network make the maily effect on other network
 layers. In the general network, if an empolyee churns or is
