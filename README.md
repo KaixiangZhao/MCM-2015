@@ -21,3 +21,9 @@ The organizational churn is a term to describe the turbulence caused by some emp
 ## Additional Functions
 - This project proposes a further improved model which can analyze the influence of reassignment and give incentive mechanism to HR managers.
 - This project conducts a sensitivity analysis to study the robustness of our algorithm, and the results show a good stability. 
+
+## Compiling and Running
+```sh
+$ g++ Algo_1.cpp -o algo.a
+$ ./algo.a
+```
